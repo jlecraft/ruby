@@ -1,9 +1,9 @@
 start = 1
 counter = 0
-maxCounter = 2
+maxCounter = 3
 
 53.times do |n|
-	if (counter > maxCounter) then
+	if (counter >= maxCounter) then
 		counter = 0
 		start = start + 1
 		maxCounter = maxCounter + 1
