@@ -15,7 +15,7 @@ class MyClass
 		@rows && @rows.clear
 
 		array.last.each do |s|
-			
+		end
 			
 	end
 	
