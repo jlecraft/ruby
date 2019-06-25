@@ -1,0 +1,12 @@
+https://en.wikibooks.org/wiki/Ruby_Programming/Syntax/Literals#The_.25_Notation
+
+Modifier	Meaning
+%q[ ]	Non-interpolated String (except for \\, \[, and \])
+%Q[ ]	Interpolated String (default)
+%r[ ]	Interpolated Regexp (flags can appear after the closing delimiter)
+%i[ ]	Non-interpolated Array of symbols, separated by whitespace (after Ruby 2.0)
+%I[ ]	Interpolated Array of symbols, separated by whitespace (after Ruby 2.0)
+%w[ ]	Non-interpolated Array of words, separated by whitespace
+%W[ ]	Interpolated Array of words, separated by whitespace
+%x[ ]	Interpolated shell command
+%s[ ]	Non-interpolated symbol

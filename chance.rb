@@ -1,6 +1,7 @@
+ITERATIONS = 1_000_000
 total = 0
 
-1000000.times do |n|
+ITERATIONS.times do |n|
 	found = false
 	if (rand < 0.5) then
 		found = true
@@ -13,4 +14,4 @@ total = 0
 	total += 1 if found
 end
 
-p total
+puts "#{total.fdiv(ITERATIONS)}"
