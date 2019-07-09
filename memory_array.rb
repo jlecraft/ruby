@@ -10,7 +10,7 @@ class MemoryArray < Array
 
 	def next
 		lastValue = value
-		
+
 		if ((@currentIndex + 1) < size) then
 			@currentIndex += 1
 		else
@@ -25,10 +25,10 @@ class MemoryArray < Array
 	end
 end
 
-m = MemoryArray.new([*(1..6)])
+m = MemoryArray.new([*(1..8)])
 
 
-8.times do |n|
+15.times do |n|
 	p m.next
 end
 
