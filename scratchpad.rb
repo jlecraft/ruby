@@ -1,12 +1,25 @@
-die = [1, 2, 3]
+outputFile = File.new('scratchpad.out', 'w+')
+
+dieSides = 6
+die = [*(1..6)]
 total = 0
 
-die.repeated_combination(3).each do |perm|
-	p perm
+die.repeated_permutation(dieSides).each do |perm|
+	outputFile.puts perm.join(" ")
 	total += 1
 end
 
 puts "#{total} total"
+
+total = 0
+die.repeated_combination(dieSides).each do |perm|
+	outputFile.puts perm.join(" ")
+	total += 1
+end
+
+puts "#{total} total"
+
+outputFile.close
 
 ###############################################################################
 # ITERATIONS = 100_000_000
