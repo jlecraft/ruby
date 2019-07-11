@@ -4,31 +4,39 @@ class MemoryArray < Array
 		@currentIndex = 0
 	end
 
+	def reset
+		@currentIndex = 0
+	end
+
 	def value
 		self[@currentIndex]
 	end
 
-	def next
-		lastValue = value
+	def first?
+		@currentIndex == 0
+	end
 
+	def last?
+		(@currentIndex + 1) == size
+	end
+
+	def next!
 		if ((@currentIndex + 1) < size) then
 			@currentIndex += 1
 		else
 			@currentIndex = 0
 		end
 
-		lastValue
+		self
 	end
 
 	def inspect
-		self.each_with_index.map { |e, i| (i == @currentIndex ? " (#{e})" : sprintf("%4d", e))}.join(" ")
+		self.each_with_index.map { |e, i| (i == @currentIndex ? "(#{e})" : "#{e}")}.join(", ")
 	end
 end
 
-m = MemoryArray.new([*(1..8)])
+# m1 = MemoryArray.new([*(1..6)])
+# m2 = MemoryArray.new([*(1..4)])
 
-
-15.times do |n|
-	p m.next
-end
+# diceList = [m1, m2]
 

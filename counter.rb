@@ -1,75 +1,63 @@
+require_relative 'memory_array'
+
 class Counter
-	# Expect a variable number of arrays
 	def initialize(*args)
-		@dice = args.dup
-		@indices = Array.new(@dice.size, 0)
+		@dice = []
+		args.each do |ary|
+			@dice << MemoryArray.new(ary)
+		end
 	end
 	
 	def reset
-		@indices.map! { 0 }
+		@dice.each { |d| d.reset }
 		self
 	end
 
 	def next!
-		@indices.each_with_index do |v, i|
-			if (v >= (@dice[i].size - 1))
-				@indices[i] = 0
-			else
-				@indices[i] += 1
+		@dice.each do |die|
+			unless (die.next!.first?) then
 				break
 			end
 		end
 		self
 	end
 	
-	def zero?
-		@indices.all? { |v| v == 0 }
+	def first?
+		@dice.all? { |die| die.first? }
+	end
+
+	def sum
+		@dice.inject(0) { |total, die| total + die.value }
 	end
 	
-	# def each
-	# 	yield(@indices)
-	# 	yield(@indices) until (next!.zero?)
-	# end
-
 	def each
-		yield(@indices.each_with_index.map { |idx, i| @dice[i][idx] })
-		next!
-
-		while (not zero?) do
-			yield(@indices.each_with_index.map { |idx, i| @dice[i][idx] })
-			next!
-		end
+		yield(@dice)
+		yield(@dice) until (next!.first?)
 	end
-	
+
 	def inspect
-		@indices
+		@dice.map { |d| d.value }
 	end
 end
 
-d4 = [*(1..4)]
-d6 = [*(1..6)]
-d8 = [*(1..8)]
-d10 = [*(1..10)]
-d12 = [*(1..12)]
+d100 = [*(1..100)]
+d4 = d100.slice(0, 4)
+d6 = d100.slice(0, 6)
+d8 = d100.slice(0, 8)
+d10 = d100.slice(0, 10)
+d12 = d100.slice(0, 12)
+d20 = d100.slice(0, 20)
 
-special1 = [1, 2, 3, 4, 5, 5] # 21
-special2 = [1, 2, 2, 2, 3, 7]
+special1 = [1, 2, 2, 3, 3, 4] # 21
+special2 = [1, 3, 4, 5, 6, 8]
 
 
-c = Counter.new(d6, d6, d6, d6, d6, d6)
+# c = Counter.new(d4, d4)
+c = Counter.new(special1, special2)
 
 totals = Hash.new(0)
-
 outputFile = File.new("counter.out", "w+")
 
-c.each do |dieSet|
-	dieSum = dieSet.inject(:+)
-	totals[dieSum] += 1
-	outputFile.printf("%s\n", dieSet.sort.join("\t"))
+c.each do
+	printf("%3d: %s\n", c.sum, c.inspect)
 end
-
-tmp = totals.map do |k, v|
-	"#{k} = #{v}"
-end
-
-puts tmp
