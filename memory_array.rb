@@ -17,11 +17,11 @@ class MemoryArray < Array
 	end
 
 	def last?
-		(@currentIndex + 1) == size
+		@currentIndex == (size - 1)
 	end
 
 	def next!
-		if ((@currentIndex + 1) < size) then
+		if (@currentIndex < (size - 1)) then
 			@currentIndex += 1
 		else
 			@currentIndex = 0
