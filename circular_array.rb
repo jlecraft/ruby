@@ -1,4 +1,4 @@
-class CircularArray < Array
+class CyclicReadArray < Array
 	def initialize(*args)
 		super(*args)
 		@currentIndex = 0
@@ -31,12 +31,8 @@ class CircularArray < Array
 	end
 
 	def inspect
-		self.each_with_index.map { |e, i| (i == @currentIndex ? "(#{e})" : "#{e}")}.join(", ")
+		value
 	end
 end
 
-# m1 = MemoryArray.new([*(1..6)])
-# m2 = MemoryArray.new([*(1..4)])
-
-# diceList = [m1, m2]
 

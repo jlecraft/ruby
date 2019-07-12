@@ -1,11 +1,8 @@
-require_relative 'memory_array'
+require_relative 'circular_array'
 
 class Counter
 	def initialize(*args)
-		@dice = []
-		args.each do |ary|
-			@dice << MemoryArray.new(ary)
-		end
+		@dice = args.map { |a| CyclicReadArray.new(a) }
 	end
 	
 	def reset
@@ -35,8 +32,12 @@ class Counter
 		yield(@dice) until (next!.first?)
 	end
 
-	def inspect
+	def to_a
 		@dice.map { |d| d.value }
+	end
+
+	def inspect
+		to_a
 	end
 end
 
