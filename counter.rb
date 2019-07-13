@@ -26,6 +26,10 @@ class Counter
 	def sum
 		@dice.inject(0) { |total, die| total + die.value }
 	end
+
+	def sample
+		@dice.map { |die| die.sample }
+	end
 	
 	def each
 		yield(@dice)

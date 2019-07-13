@@ -7,14 +7,13 @@ d8 = d20.first(8)
 d6 = d20.first(6)
 d4 = d20.first(4)
 
-dieSet = Counter.new(d6, d6, d6, d6, d6)
+dieSet = Counter.new(d6, d6, d6)
 
 totals = Hash.new(0)
 total = 0
 
-dieSet.each do |s|
-	sum = dieSet.to_a.sort.last(3).inject(:+)
-	totals[sum] += 1
+dieSet.each do
+	totals[dieSet.sum] += 1
 	total += 1
 end
 
